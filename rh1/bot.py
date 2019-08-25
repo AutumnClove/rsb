@@ -1265,6 +1265,8 @@ class RH1(discord.Client):
                                 final_args.append(flag)
                             elif flag == 'restrict':
                                 final_args.append(flag)
+                            elif flag == 'anon':
+                                final_args.append(flag)
                             elif flag == 'image':
                                 eval_content = f"```\nem = discord.Embed(colour=discord.Colour(0x36393F))\nem.set_image(url=\"{leftover_args[2]}\")\nawait self.safe_send_message(channel, embed=em)\n\n```"
                                 if 'open' in flags:
@@ -1360,7 +1362,7 @@ class RH1(discord.Client):
                             if resp:
                                 await self.safe_send_message(channel, content=clean_bad_pings(resp))
                             return
-                    return Response(clean_bad_pings(self.tags[tag][1]))
+                    return Response(clean_bad_pings(self.tags[tag][1]), if 'anon' in final_args delete_invoking=True) #this might not be right
             raise CommandError('Tag doesn\'t exist')
     
     async def cmd_id(self, message, author, guild):
